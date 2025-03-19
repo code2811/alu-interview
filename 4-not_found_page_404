@@ -1,0 +1,28 @@
+# 4-not_found_page_404
+
+# 1. Install Nginx if not already installed
+sudo apt update
+sudo apt install nginx
+
+# 2. Create a custom 404 page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
+
+# 3. Configure Nginx to use the custom 404 page
+sudo nano /etc/nginx/sites-available/default
+# Add the following error_page directive and the location block for the custom 404 page:
+# error_page 404 /404.html;
+# location = /404.html {
+#     root /var/www/html;
+#     internal;
+# }
+
+# 4. Test the Nginx configuration
+sudo nginx -t
+
+# 5. Restart Nginx to apply the changes
+sudo systemctl restart nginx
+
+# 6. Verify the custom 404 page
+curl -sI http://your_server_ip/xyz
+curl http://your_server_ip/xyzfoo
+
